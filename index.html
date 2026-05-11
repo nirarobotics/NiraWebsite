@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIRA Robotics — Logically Practical</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  <!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║           🖼️  IMAGE FOLDER GUIDE — READ THIS FIRST        ║
+  ╠══════════════════════════════════════════════════════════╣
+  ║  All images go inside the  images/  folder.             ║
+  ║                                                         ║
+  ║  images/                                                ║
+  ║  ├── logo/                                              ║
+  ║  │   └── logo.png       ← Your brand logo              ║
+  ║  │         (recommended: 200×60px, transparent bg)      ║
+  ║  ├── hero/                                              ║
+  ║  │   └── robot.png      ← Hero section robot image     ║
+  ║  │         (recommended: 600×600px, transparent bg)     ║
+  ║  ├── gallery/                                           ║
+  ║  │   ├── g1.jpg  ← spans 2 cols, use wide landscape    ║
+  ║  │   ├── g2.jpg                                        ║
+  ║  │   ├── g3.jpg         (recommended: 800×600px JPG)   ║
+  ║  │   ├── g4.jpg                                        ║
+  ║  │   ├── g5.jpg                                        ║
+  ║  │   └── g6.jpg                                        ║
+  ║  └── store/                                             ║
+  ║      ├── s1.png  → Arduino Uno R3                      ║
+  ║      ├── s2.png  → Servo Motor Pack                    ║
+  ║      ├── s3.png  → LED Kit                             ║
+  ║      ├── s4.png  → LiPo Battery                        ║
+  ║      ├── s5.png  → Ultrasonic Sensor                   ║
+  ║      ├── s6.png  → DC Motor                            ║
+  ║      ├── s7.png  → LCD Display                         ║
+  ║      └── s8.png  → Jumper Wires                        ║
+  ║                   (recommended: 400×400px PNG)          ║
+  ║                                                         ║
+  ║  ✅ If an image file is MISSING, a nice emoji           ║
+  ║     placeholder is shown automatically. Nothing breaks. ║
+  ║  ✅ To swap an image — just replace the file with the   ║
+  ║     same filename. Refresh the browser. Done.           ║
+  ╚══════════════════════════════════════════════════════════╝
+  -->
+
+  <style>
+    :root {
+      --accent:#0a76c7; --accent-light:#3a9de8; --accent-glow:rgba(10,118,199,0.35);
+      --bg:#f5f7fa; --bg2:#eef2f7;
+      --surface:rgba(255,255,255,0.75); --surface-solid:#ffffff;
+      --text:#0d1117; --text2:#4a5568; --text3:#8896a5;
+      --border:rgba(10,118,199,0.12);
+      --shadow:0 8px 40px rgba(10,118,199,0.10);
+      --shadow-lg:0 20px 60px rgba(10,118,199,0.15);
+      --radius:20px; --radius-sm:12px;
+      --nav-bg:rgba(245,247,250,0.82); --card-bg:rgba(255,255,255,0.80);
+      --transition:all 0.38s cubic-bezier(0.4,0,0.2,1);
+      --font-head:'Syne',sans-serif; --font-body:'DM Sans',sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg:#080c12; --bg2:#0e1420;
+      --surface:rgba(16,22,34,0.80); --surface-solid:#111827;
+      --text:#e8edf5; --text2:#8fa0b4; --text3:#4a5f75;
+      --border:rgba(10,118,199,0.22);
+      --shadow:0 8px 40px rgba(0,0,0,0.40);
+      --shadow-lg:0 20px 60px rgba(0,0,0,0.55);
+      --nav-bg:rgba(8,12,18,0.90); --card-bg:rgba(16,24,38,0.88);
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);transition:background .45s,color .45s;overflow-x:hidden}
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button{cursor:pointer;font-family:var(--font-body)}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:99px}
+
+    /* PRELOADER */
+    #preloader{position:fixed;inset:0;z-index:9999;background:#080c12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .7s,visibility .7s}
+    #preloader.hidden{opacity:0;visibility:hidden}
+    .pre-logo{font-family:var(--font-head);font-size:2.6rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;animation:preLogoPulse 1.4s ease infinite}
+    .pre-tag{font-size:.78rem;color:#4a5f75;letter-spacing:.14em;text-transform:uppercase}
+    .pre-spinner{width:44px;height:44px;border:3px solid rgba(10,118,199,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes preLogoPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.95)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:900;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;transition:var(--transition)}
+    nav.scrolled{box-shadow:var(--shadow)}
+    .nav-brand{display:flex;align-items:center;gap:10px}
+    .nav-logo{height:36px;width:auto;object-fit:contain}
+    .nav-logo-fallback{font-family:var(--font-head);font-size:1.45rem;font-weight:800;color:var(--accent);letter-spacing:-.02em}
+    .nav-logo-fallback span{color:var(--text)}
+    .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+    .nav-links a{font-size:.88rem;font-weight:500;color:var(--text2);transition:color .25s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-right{display:flex;align-items:center;gap:14px}
+    .btn-theme{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface);color:var(--text2);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:var(--transition);backdrop-filter:blur(10px)}
+    .btn-theme:hover{border-color:var(--accent);color:var(--accent);transform:rotate(20deg)}
+    .btn-nav-cta{padding:9px 22px;border-radius:99px;background:var(--accent);color:#fff;font-size:.85rem;font-weight:600;border:none;transition:var(--transition);box-shadow:0 4px 18px var(--accent-glow)}
+    .btn-nav-cta:hover{transform:scale(1.05);box-shadow:0 6px 28px var(--accent-glow)}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+    .nav-hamburger span{display:block;width:24px;height:2px;background:var(--text);border-radius:2px;transition:var(--transition)}
+
+    /* HERO */
+    #hero{min-height:100vh;padding:120px 5% 80px;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 60%,rgba(10,118,199,.07) 100%)}
+    .hero-grid-bg{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(10,118,199,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(10,118,199,.04) 1px,transparent 1px);background-size:48px 48px}
+    .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+    .hero-orb-1{width:520px;height:520px;background:radial-gradient(circle,rgba(10,118,199,.20) 0%,transparent 70%);top:-120px;right:5%}
+    .hero-orb-2{width:340px;height:340px;background:radial-gradient(circle,rgba(58,157,232,.14) 0%,transparent 70%);bottom:0;left:10%}
+    .hero-content{position:relative;z-index:1;display:flex;align-items:center;gap:60px;width:100%;max-width:1280px;margin:0 auto}
+    .hero-left{flex:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:6px 16px 6px 10px;font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:28px;backdrop-filter:blur(12px)}
+    .hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:badgePulse 2s ease infinite}
+    @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 6px transparent}}
+    .hero-h1{font-family:var(--font-head);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--text);margin-bottom:22px}
+    .hero-h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:1.12rem;font-weight:300;color:var(--text2);line-height:1.7;max-width:520px;margin-bottom:44px}
+    .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+    .btn-primary{padding:15px 34px;border-radius:99px;background:var(--accent);color:#fff;font-size:.96rem;font-weight:600;border:none;box-shadow:0 6px 28px var(--accent-glow);transition:var(--transition)}
+    .btn-primary:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 10px 40px var(--accent-glow)}
+    .btn-ghost{padding:14px 32px;border-radius:99px;background:var(--surface);color:var(--text);font-size:.96rem;font-weight:500;border:1.5px solid var(--border);backdrop-filter:blur(10px);transition:var(--transition)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+    .hero-right{flex:0 0 460px;display:flex;align-items:center;justify-content:center;position:relative}
+    .hero-robot-wrap{position:relative;width:400px;height:400px}
+    .hero-robot-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,transparent 60%,rgba(10,118,199,.28) 80%,transparent 100%);animation:robotRing 8s linear infinite}
+    @keyframes robotRing{to{transform:rotate(360deg)}}
+    .hero-robot-card{position:absolute;inset:20px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:var(--shadow-lg)}
+    .robot-img-real{width:220px;height:220px;object-fit:contain;animation:robotFloat 4s ease-in-out infinite;display:none}
+    .robot-img-real.show{display:block}
+    .robot-svg-wrap{width:260px;height:260px;animation:robotFloat 4s ease-in-out infinite}
+    @keyframes robotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .hero-stats{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);display:flex;gap:14px}
+    .hero-stat-pill{background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:99px;padding:8px 18px;text-align:center;white-space:nowrap}
+    .hero-stat-pill strong{display:block;font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--accent)}
+    .hero-stat-pill span{font-size:.72rem;color:var(--text3)}
+
+    /* SECTIONS */
+    section{padding:110px 5%}
+    .section-label{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+    .section-label::before{content:'';display:block;width:18px;height:2px;background:var(--accent);border-radius:2px}
+    .section-title{font-family:var(--font-head);font-size:clamp(2rem,3.8vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-.025em;color:var(--text);margin-bottom:16px}
+    .section-sub{font-size:1.06rem;font-weight:300;color:var(--text2);max-width:520px;line-height:1.65}
+    .section-head{margin-bottom:64px}
+    .section-head.center{text-align:center}
+    .section-head.center .section-label{justify-content:center}
+    .section-head.center .section-sub{margin:0 auto}
+
+    /* ANIMATIONS */
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.from-left{transform:translateX(-36px)}
+    .reveal.from-right{transform:translateX(36px)}
+    .reveal.zoom{transform:scale(.92)}
+    .reveal.visible{opacity:1;transform:none}
+    .stagger .reveal:nth-child(1){transition-delay:0s}
+    .stagger .reveal:nth-child(2){transition-delay:.12s}
+    .stagger .reveal:nth-child(3){transition-delay:.24s}
+    .stagger .reveal:nth-child(4){transition-delay:.36s}
+
+    /* WHY */
+    #why{background:var(--bg)}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1100px;margin:0 auto}
+    .why-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:44px 36px;backdrop-filter:blur(18px);transition:var(--transition);position:relative;overflow:hidden}
+    .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transform:scaleX(0);transform-origin:left;transition:transform .45s}
+    .why-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+    .why-card:hover::before{transform:scaleX(1)}
+    .why-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(10,118,199,.14),rgba(10,118,199,.05));border:1.5px solid rgba(10,118,199,.20);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:24px}
+    .why-card h3{font-family:var(--font-head);font-size:1.22rem;font-weight:700;color:var(--text);margin-bottom:12px}
+    .why-card p{font-size:.95rem;color:var(--text2);line-height:1.65;font-weight:300}
+
+    /* COURSES */
+    #courses{background:var(--bg2)}
+    .courses-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1280px;margin:0 auto}
+    .course-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(16px);transition:var(--transition);cursor:pointer}
+    .course-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
+    .course-img{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .course-img .ci-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;transition:transform .5s}
+    .course-card:hover .ci-inner{transform:scale(1.14)}
+    .course-badge{position:absolute;top:12px;right:12px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:99px;letter-spacing:.06em}
+    .course-duration{position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:99px;backdrop-filter:blur(8px)}
+    .course-body{padding:22px 22px 26px}
+    .course-level{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px}
+    .course-body h3{font-family:var(--font-head);font-size:1.12rem;font-weight:700;color:var(--text);margin-bottom:8px}
+    .course-kit-tag{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;color:#22c55e;font-weight:600;margin-bottom:10px}
+    .course-body p{font-size:.88rem;color:var(--text2);line-height:1.6;font-weight:300;margin-bottom:20px}
+    .course-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:16px}
+    .course-price{font-family:var(--font-head);font-size:1.18rem;font-weight:700;color:var(--text)}
+    .btn-enroll{padding:8px 18px;border-radius:99px;background:var(--accent);color:#fff;font-size:.8rem;font-weight:600;border:none;transition:var(--transition)}
+    .btn-enroll:hover{transform:scale(1.06);box-shadow:0 4px 18px var(--accent-glow)}
+
+    /* GALLERY */
+    #gallery{background:var(--bg)}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+    .gallery-item{border-radius:var(--radius-sm);overflow:hidden;aspect-ratio:4/3;cursor:pointer;position:relative;background:var(--card-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3.5rem;transition:var(--transition)}
+    .gallery-item:nth-child(1){grid-column:span 2}
+    .gallery-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .gallery-item:hover img{transform:scale(1.07)}
+    .gi-emoji{position:relative;z-index:1;font-size:3.5rem}
+    .gallery-overlay{position:absolute;inset:0;background:rgba(10,118,199,.5);display:flex;align-items:center;justify-content:center;font-size:1.6rem;opacity:0;transition:opacity .35s;z-index:2}
+    .gallery-item:hover .gallery-overlay{opacity:1}
+    .gallery-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.72));color:#fff;font-size:.82rem;font-weight:500;padding:30px 14px 12px;transform:translateY(100%);transition:transform .35s;z-index:3}
+    .gallery-item:hover .gallery-caption{transform:translateY(0)}
+    .gallery-item:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
+    /* hide emoji when real image loaded */
+    .gallery-item .img-loaded + .gi-emoji{display:none}
+
+    /* Lightbox */
+    #lightbox{position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.92);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+    #lightbox.open{opacity:1;visibility:visible}
+    .lb-content{position:relative;max-width:760px;width:94%;animation:lbIn .4s cubic-bezier(.34,1.56,.64,1);text-align:center}
+    @keyframes lbIn{from{transform:scale(.78);opacity:0}to{transform:scale(1);opacity:1}}
+    .lb-img-wrap{border-radius:var(--radius);overflow:hidden;min-height:160px;display:flex;align-items:center;justify-content:center}
+    .lb-img-wrap img{width:100%;height:auto;max-height:75vh;object-fit:contain;border-radius:16px}
+    .lb-title{font-family:var(--font-head);font-size:1.1rem;color:#fff;margin-top:18px}
+    .lb-close{position:absolute;top:-44px;right:0;font-size:1.6rem;color:rgba(255,255,255,.7);background:none;border:none;transition:color .2s}
+    .lb-close:hover{color:#fff}
+
+    /* STORE */
+    #store{background:var(--bg2)}
+    .store-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1280px;margin:0 auto 40px}
+    .store-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;backdrop-filter:blur(16px);transition:var(--transition);text-align:center}
+    .store-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .store-img{width:90px;height:90px;object-fit:contain;margin:0 auto 14px;border-radius:12px}
+    .store-emoji-fb{font-size:3rem;margin-bottom:14px}
+    .store-card h4{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px}
+    .store-card .price{font-size:1.05rem;font-weight:700;color:var(--accent);margin-bottom:16px}
+    .btn-add{width:100%;padding:10px;border-radius:99px;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-size:.84rem;font-weight:600;transition:var(--transition)}
+    .btn-add:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .btn-add.added{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .cart-bar{max-width:1280px;margin:0 auto;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:26px 36px;backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .cart-items{flex:1}
+    .cart-items h4{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:10px}
+    #cart-list{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+    #cart-list li{background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:5px 14px;font-size:.82rem;color:var(--text2)}
+    .btn-download{padding:12px 26px;border-radius:99px;background:var(--accent);color:#fff;border:none;font-size:.9rem;font-weight:600;transition:var(--transition)}
+    .btn-download:hover{transform:scale(1.05);box-shadow:0 6px 24px var(--accent-glow)}
+
+    /* CONTACT */
+    #contact{background:var(--bg)}
+    .contact-wrap{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+    .contact-info h2{font-family:var(--font-head);font-size:2rem;font-weight:800;color:var(--text);margin-bottom:16px;letter-spacing:-.02em}
+    .contact-info>p{font-size:.95rem;color:var(--text2);line-height:1.7;font-weight:300;margin-bottom:28px}
+    .contact-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+    .contact-icon{width:42px;height:42px;flex-shrink:0;border-radius:12px;background:linear-gradient(135deg,rgba(10,118,199,.12),rgba(10,118,199,.04));border:1px solid rgba(10,118,199,.18);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+    .contact-item p{font-size:.92rem;color:var(--text2);margin:0;line-height:1.5}
+    .contact-item strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+    .btn-wa{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:99px;background:#25D366;color:#fff;font-size:.92rem;font-weight:600;border:none;margin-top:8px;transition:var(--transition)}
+    .btn-wa:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(37,211,102,.35)}
+    .contact-glass{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:36px;backdrop-filter:blur(18px)}
+    .contact-glass h3{font-family:var(--font-head);font-size:1.18rem;font-weight:700;color:var(--text);margin-bottom:22px}
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-size:.82rem;color:var(--text3);margin-bottom:6px;font-weight:500}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:.92rem;transition:border-color .25s;resize:vertical}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:var(--text3)}
+    .form-group select option{background:var(--surface-solid);color:var(--text)}
+    .two-col-fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .btn-submit{width:100%;padding:13px;border-radius:99px;background:var(--accent);color:#fff;font-size:.94rem;font-weight:600;border:none;transition:var(--transition)}
+    .btn-submit:hover{box-shadow:0 6px 28px var(--accent-glow);transform:translateY(-2px)}
+    .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .wa-submit-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366 !important;box-shadow:0 6px 24px rgba(37,211,102,.35) !important}
+    .wa-submit-btn:hover{box-shadow:0 8px 32px rgba(37,211,102,.50) !important;transform:translateY(-2px) !important}
+    .form-success{display:none;text-align:center;padding:24px 0}
+    .form-success .ck{font-size:2.8rem;margin-bottom:12px}
+    .form-success h4{font-family:var(--font-head);font-size:1.1rem;color:var(--text);margin-bottom:6px}
+    .form-success p{font-size:.88rem;color:var(--text2)}
+
+    /* FOOTER */
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 5%;text-align:center}
+    .f-logo{height:38px;object-fit:contain;margin:0 auto 10px}
+    .f-logo-fb{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:var(--accent);margin-bottom:6px}
+    .f-tag{color:var(--accent);font-size:.78rem;margin-bottom:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+    footer p{font-size:.82rem;color:var(--text3)}
+
+    /* FLOATING */
+    #float-wa{position:fixed;bottom:28px;right:28px;z-index:800;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:1.7rem;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(37,211,102,.45);transition:var(--transition)}
+    #float-wa:hover{transform:scale(1.12) translateY(-3px)}
+    #float-register{position:fixed;bottom:28px;left:28px;z-index:800;padding:14px 26px;border-radius:99px;background:var(--surface);border:1.5px solid var(--border);backdrop-filter:blur(18px);color:var(--text);font-size:.88rem;font-weight:600;font-family:var(--font-body);box-shadow:var(--shadow);transition:var(--transition);display:flex;align-items:center;gap:8px}
+    #float-register::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);animation:badgePulse 2s infinite;flex-shrink:0}
+    #float-register:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+
+    /* MODALS */
+    .modal-overlay{position:fixed;inset:0;z-index:1050;background:rgba(0,0,0,.72);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;padding:20px;overflow-y:auto}
+    .modal-overlay.open{opacity:1;visibility:visible}
+    .modal-box{background:var(--surface-solid);border:1px solid var(--border);border-radius:28px;width:100%;max-width:520px;padding:40px;position:relative;transform:scale(.88) translateY(20px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);margin:auto}
+    .modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
+    .modal-close{position:absolute;top:16px;right:20px;font-size:1.3rem;color:var(--text3);background:none;border:none;transition:color .2s}
+    .modal-close:hover{color:var(--accent)}
+    .modal-title{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:6px}
+    .modal-sub{font-size:.9rem;color:var(--text2);margin-bottom:28px}
+
+    /* Payment */
+    .pay-course-info{background:linear-gradient(135deg,rgba(10,118,199,.12),rgba(10,118,199,.04));border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:24px}
+    .pay-course-info p{font-size:.78rem;color:var(--text3);margin-bottom:4px}
+    .pay-course-info h3{font-family:var(--font-head);font-size:1.15rem;font-weight:700;color:var(--text)}
+    .pay-price-big{font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:var(--accent);margin-top:6px}
+    .pay-methods{display:flex;gap:12px;margin-bottom:24px}
+    .pay-method{flex:1;padding:14px;border-radius:14px;border:2px solid var(--border);background:var(--surface);font-size:.88rem;font-weight:600;color:var(--text2);transition:var(--transition);text-align:center;cursor:pointer}
+    .pay-method.selected{border-color:var(--accent);color:var(--accent);background:rgba(10,118,199,.08)}
+    .pay-method:hover{border-color:var(--accent)}
+    .pay-input{width:100%;padding:12px 16px;margin-bottom:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:.92rem;transition:border-color .25s}
+    .pay-input:focus{outline:none;border-color:var(--accent)}
+    .pay-input::placeholder{color:var(--text3)}
+    .pay-note{font-size:.76rem;color:var(--text3);margin-bottom:18px;line-height:1.5;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--surface)}
+    .pay-success{text-align:center;padding:24px 0;display:none}
+    .pay-success .ck{font-size:4rem;margin-bottom:14px}
+    .pay-success h3{font-family:var(--font-head);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:10px}
+    .pay-success p{color:var(--text2);font-size:.9rem;line-height:1.6}
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){.courses-grid{grid-template-columns:repeat(2,1fr)}.store-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:860px){
+      .hero-content{flex-direction:column-reverse;gap:40px}
+      .hero-right{flex:none}
+      .hero-robot-wrap{width:280px;height:280px}
+      .robot-svg-wrap{width:180px;height:180px}
+      .why-grid{grid-template-columns:1fr;max-width:480px}
+      .contact-wrap{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .gallery-item:nth-child(1){grid-column:span 1}
+      nav .nav-links{display:none}
+      .nav-hamburger{display:flex}
+      .hero-stats{display:none}
+      .two-col-fg{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .courses-grid{grid-template-columns:1fr}
+      .store-grid{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:1fr}
+      section{padding:80px 5%}
+      #float-register{padding:12px 18px;font-size:.8rem}
+      .modal-box{padding:28px 20px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo">NIRA</div>
+  <div class="pre-tag">Logically Practical</div>
+  <div class="pre-spinner"></div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <!-- 🖼️ Logo: images/logo/logo.png — fallback text shows if missing -->
+    <img src="images/logo/logo.png" alt="NIRA Robotics" class="nav-logo"
+         onerror="this.style.display='none';document.getElementById('nl-fb').style.display='block'">
+    <div class="nav-logo-fallback" id="nl-fb" style="display:none">NIRA <span>Robotics</span></div>
+  </div>
+  <ul class="nav-links" id="nav-links-list">
+    <li><a href="#why">Why NIRA</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#store">Store</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="btn-theme" id="theme-toggle" title="Toggle theme">☀️</button>
+    <button class="btn-nav-cta" onclick="openModal('modal-register')">Register</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge reveal"><span class="hero-badge-dot"></span>Now Enrolling · Chennai, India</div>
+      <h1 class="hero-h1 reveal">Build the <em>Future</em><br>with Robotics</h1>
+      <p class="hero-sub reveal">Hands-on practical learning that transforms curious minds into confident builders. Real kits. Real projects. Real skills.</p>
+      <div class="hero-btns reveal">
+        <button class="btn-primary" onclick="scrollTo('courses')">Explore Courses</button>
+        <button class="btn-ghost" onclick="scrollTo('gallery')">View Projects</button>
+      </div>
+    </div>
+    <div class="hero-right reveal zoom">
+      <div class="hero-robot-wrap">
+        <div class="hero-robot-ring"></div>
+        <div class="hero-robot-card">
+          <!-- 🖼️ Hero robot: images/hero/robot.png (transparent PNG) -->
+          <img src="images/hero/robot.png" alt="Robot" class="robot-img-real"
+               onload="this.classList.add('show');this.nextElementSibling.style.display='none'"
+               onerror="this.style.display='none'">
+          <div class="robot-svg-wrap">
+            <svg viewBox="0 0 220 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="55" y="100" width="110" height="110" rx="22" fill="#0a76c7" opacity=".9"/>
+              <rect x="72" y="118" width="76" height="50" rx="10" fill="rgba(255,255,255,.15)"/>
+              <rect x="80" y="126" width="60" height="34" rx="7" fill="#0d1117"/>
+              <text x="110" y="149" text-anchor="middle" font-size="12" fill="#0a76c7" font-family="monospace">^_^</text>
+              <rect x="70" y="46" width="80" height="64" rx="18" fill="#0a76c7" opacity=".85"/>
+              <circle cx="95" cy="70" r="11" fill="white"/><circle cx="125" cy="70" r="11" fill="white"/>
+              <circle cx="97" cy="71" r="6" fill="#0d1117"/><circle cx="127" cy="71" r="6" fill="#0d1117"/>
+              <circle cx="99" cy="69" r="2" fill="white"/><circle cx="129" cy="69" r="2" fill="white"/>
+              <line x1="110" y1="46" x2="110" y2="26" stroke="#0a76c7" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="110" cy="22" r="6" fill="#3a9de8"/><circle cx="110" cy="22" r="3" fill="white" opacity=".8"/>
+              <rect x="100" y="108" width="20" height="14" rx="5" fill="#1a5c99"/>
+              <rect x="20" y="108" width="30" height="76" rx="14" fill="#0a76c7" opacity=".75"/>
+              <rect x="170" y="108" width="30" height="76" rx="14" fill="#0a76c7" opacity=".75"/>
+              <circle cx="35" cy="196" r="14" fill="#1a5c99"/><circle cx="185" cy="196" r="14" fill="#1a5c99"/>
+              <rect x="72" y="208" width="28" height="44" rx="12" fill="#0a76c7" opacity=".8"/>
+              <rect x="120" y="208" width="28" height="44" rx="12" fill="#0a76c7" opacity=".8"/>
+              <rect x="65" y="244" width="42" height="16" rx="8" fill="#1a5c99"/>
+              <rect x="113" y="244" width="42" height="16" rx="8" fill="#1a5c99"/>
+              <circle cx="88" cy="154" r="4" fill="#3a9de8" opacity=".9"><animate attributeName="opacity" values=".9;.3;.9" dur="1.8s" repeatCount="indefinite"/></circle>
+              <circle cx="110" cy="154" r="4" fill="#3a9de8" opacity=".6"><animate attributeName="opacity" values=".6;1;.6" dur="1.4s" repeatCount="indefinite"/></circle>
+              <circle cx="132" cy="154" r="4" fill="#3a9de8" opacity=".9"><animate attributeName="opacity" values=".9;.3;.9" dur="2.2s" repeatCount="indefinite"/></circle>
+            </svg>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat-pill"><strong>500+</strong><span>Students</span></div>
+          <div class="hero-stat-pill"><strong>4</strong><span>Levels</span></div>
+          <div class="hero-stat-pill"><strong>100%</strong><span>Practical</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NIRA -->
+<section id="why">
+  <div class="section-head center">
+    <div class="section-label reveal">Our Approach</div>
+    <h2 class="section-title reveal">Why Choose NIRA Robotics?</h2>
+    <p class="section-sub reveal">Every concept is tied to something you can hold, build, and be proud of.</p>
+  </div>
+  <div class="why-grid stagger">
+    <div class="why-card reveal">
+      <div class="why-icon">🤖</div>
+      <h3>Hands-on Learning</h3>
+      <p>Every session is a build session. Students assemble real circuits, program actual robots, and solve real problems — not hypothetical ones.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">📊</div>
+      <h3>Structured Levels</h3>
+      <p>Four progressive levels for ages 6–17 ensure your child is always challenged but never overwhelmed. Clear milestones, clear growth.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">📦</div>
+      <h3>Take-home Kits</h3>
+      <p>Every student receives a robotics kit to take home. Learning doesn't stop at the classroom — it continues wherever curiosity leads.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-head center">
+    <div class="section-label reveal">Programs</div>
+    <h2 class="section-title reveal">Our Courses</h2>
+    <p class="section-sub reveal">Structured, age-appropriate programs that grow with your child — from curious beginner to confident creator.</p>
+  </div>
+  <div class="courses-grid stagger">
+    <div class="course-card reveal" onclick="openPayModal('Junior Level 1 — Robot Basics','₹3,499')">
+      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.18),rgba(58,157,232,.08))">
+        <div class="ci-inner">🌱</div>
+        <span class="course-badge">Ages 6–9</span>
+        <span class="course-duration">⏱ 2 Months</span>
+      </div>
+      <div class="course-body">
+        <div class="course-level">Junior Level 1</div>
+        <h3>Robot Basics</h3>
+        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+        <p>Introduction to electronics, simple circuits, and building your first robot using block-based programming.</p>
+        <div class="course-footer">
+          <span class="course-price">₹3,499</span>
+          <button class="btn-enroll">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="course-card reveal" onclick="openPayModal('Junior Level 2 — Smart Machines','₹3,999')">
+      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.22),rgba(58,157,232,.10))">
+        <div class="ci-inner">⚙️</div>
+        <span class="course-badge">Ages 10–12</span>
+        <span class="course-duration">⏱ 2 Months</span>
+      </div>
+      <div class="course-body">
+        <div class="course-level">Junior Level 2</div>
+        <h3>Smart Machines</h3>
+        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+        <p>Sensors, actuators, and logic. Students build remote-controlled robots and learn beginner programming concepts.</p>
+        <div class="course-footer">
+          <span class="course-price">₹3,999</span>
+          <button class="btn-enroll">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="course-card reveal" onclick="openPayModal('Senior Level 1 — Arduino Robotics','₹5,499')">
+      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.25),rgba(58,157,232,.12))">
+        <div class="ci-inner">🔧</div>
+        <span class="course-badge">Ages 13–15</span>
+        <span class="course-duration">⏱ 2 Months</span>
+      </div>
+      <div class="course-body">
+        <div class="course-level">Senior Level 1</div>
+        <h3>Arduino Robotics</h3>
+        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+        <p>Dive into Arduino, C++ programming, motor control, and build autonomous robots that respond to their environment.</p>
+        <div class="course-footer">
+          <span class="course-price">₹5,499</span>
+          <button class="btn-enroll">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="course-card reveal" onclick="openPayModal('Senior Level 2 — AI & Robotics','₹6,999')">
+      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.30),rgba(58,157,232,.15))">
+        <div class="ci-inner">🧠</div>
+        <span class="course-badge">Ages 16–17</span>
+        <span class="course-duration">⏱ 2 Months</span>
+      </div>
+      <div class="course-body">
+        <div class="course-level">Senior Level 2</div>
+        <h3>AI & Robotics</h3>
+        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+        <p>Advanced robotics with AI integration — computer vision, machine learning basics, and project competition prep.</p>
+        <div class="course-footer">
+          <span class="course-price">₹6,999</span>
+          <button class="btn-enroll">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<!-- 🖼️ Place your project photos at images/gallery/g1.jpg … g6.jpg -->
+<!-- If a file is missing, the emoji placeholder shows automatically -->
+<section id="gallery">
+  <div class="section-head center">
+    <div class="section-label reveal">Student Work</div>
+    <h2 class="section-title reveal">Learning in Action</h2>
+    <p class="section-sub reveal">Real projects built by NIRA students across Chennai.</p>
+  </div>
+  <div class="gallery-grid stagger">
+    <div class="gallery-item reveal" onclick="openLightbox('images/gallery/g1.jpg','🤖','Solar Tracker — Grade 5')">
+      <img src="images/gallery/g1.jpg" alt="Project 1" onload="this.classList.add('img-loaded')" onerror="this.remove()">
+      <span class="gi-emoji">🤖</span>
+      <div class="gallery-overlay">🔍</div>
+      <div class="gallery-caption">Solar Tracker — Grade 7</div>
+    </div>
+    <div class="gallery-item reveal" onclick="openLightbox('images/gallery/g2.jpg','🚗','Obstacle Avoider — Junior Level 2')">
+      <img src="images/gallery/g2.jpg" alt="Project 2" onload="this.classList.add('img-loaded')" onerror="this.remove()">
+      <span class="gi-emoji">🚗</span>
+      <div class="gallery-overlay">🔍</div>
+      <div class="gallery-caption">Obstacle Avoider — Junior Level 2</div>
+    </div>
+    <div class="gallery-item reveal" onclick="openLightbox('images/gallery/g3.jpg','💡','Miniature — Grade 6')">
+      <img src="images/gallery/g3.jpg" alt="Project 3" onload="this.classList.add('img-loaded')" onerror="this.remove()">
+      <span class="gi-emoji">💡</span>
+      <div class="gallery-overlay">🔍</div>
+      <div class="gallery-caption">Miniature — Grade 6</div>
+    </div>
+    <div class="gallery-item reveal" onclick="openLightbox('images/gallery/g4.jpg','🦾','Surveillance BOT — Senior Level 1')">
+      <img src="images/gallery/g4.jpg" alt="Project 4" onload="this.classList.add('img-loaded')" onerror="this.remove()">
+      <span class="gi-emoji">🦾</span>
+      <div class="gallery-overlay">🔍</div>
+      <div class="gallery-caption">Surveillance BOT — Senior Level 1</div>
+    </div>
+    <div class="gallery-item reveal" onclick="openLightbox('images/gallery/g5.jpg','🛸','Arduino Metal Detector — Senior Level 2')">
+      <img src="images/gallery/g5.jpg" alt="Project 5" onload="this.classList.add('img-loaded')" onerror="this.remove()">
+      <span class="gi-emoji">🛸</span>
+      <div class="gallery-overlay">🔍</div>
+      <div class="gallery-caption">Arduino Metal Detector — Senior Level 2</div>
+    </div>
+    <div class="gallery-item reveal" onclick="openLightbox('images/gallery/g6.jpg','🌐','Vacuum BOT — Grade 9')">
+      <img src="images/gallery/g6.jpg" alt="Project 6" onload="this.classList.add('img-loaded')" onerror="this.remove()">
+      <span class="gi-emoji">🌐</span>
+      <div class="gallery-overlay">🔍</div>
+      <div class="gallery-caption">Vacuum BOT — Grade 9</div>
+    </div>
+  </div>
+</section>
+
+<!-- STORE -->
+<!-- 🖼️ Place component images at images/store/s1.png … s8.png -->
+<section id="store">
+  <div class="section-head center">
+    <div class="section-label reveal">Components</div>
+    <h2 class="section-title reveal">Component Store</h2>
+    <p class="section-sub reveal">Add components to your list and download it — bring it to class or enquire with us directly.</p>
+  </div>
+  <div class="store-grid stagger" id="store-grid"></div>
+  <div class="cart-bar reveal">
+    <div class="cart-items">
+      <h4>🛒 Your Component List</h4>
+      <ul id="cart-list"><li style="color:var(--text3);font-style:italic;background:none;border:none;padding:0">No items added yet</li></ul>
+    </div>
+    <button class="btn-download" onclick="downloadList()">⬇ Download List</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info reveal from-left">
+      <div class="section-label">Get in Touch</div>
+      <h2>Let's talk about your child's future.</h2>
+      <p>We're in Chennai and always happy to answer questions from parents, students, and schools. Reach out anytime.</p>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <p><strong>Location</strong>Chennai, Tamil Nadu, India</p>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <p><strong>Phone</strong><a href="tel:+918438173206" style="color:var(--accent)">+91 84381 73206</a></p>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <p><strong>Email</strong><a href="mailto:nirarobotics@gmail.com" style="color:var(--accent)">nirarobotics@gmail.com</a></p>
+      </div>
+      <button class="btn-wa" onclick="window.open('https://wa.me/918438173206?text=Hi%20NIRA%20Robotics!%20I%20want%20to%20know%20more%20about%20your%20courses.','_blank')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Chat on WhatsApp
+      </button>
+    </div>
+
+    <div class="contact-glass reveal from-right">
+      <h3>Quick Enquiry</h3>
+      <form id="enquiry-form" onsubmit="submitEnquiryPDF(event)">
+        <div class="form-group">
+          <label>Parent Name *</label>
+          <input id="eq-name" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="two-col-fg">
+          <div class="form-group">
+            <label>Your Phone *</label>
+            <input id="eq-phone" type="tel" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+          <div class="form-group">
+            <label>Child's Age *</label>
+            <input id="eq-age" type="number" placeholder="e.g. 10" min="5" max="18" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Course Interest</label>
+          <select id="eq-course">
+            <option>Junior Level 1 — Robot Basics (₹3,499)</option>
+            <option>Junior Level 2 — Smart Machines (₹3,999)</option>
+            <option>Senior Level 1 — Arduino Robotics (₹5,499)</option>
+            <option>Senior Level 2 — AI & Robotics (₹6,999)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea id="eq-msg" rows="2" placeholder="Any questions for us?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit pdf-submit-btn" id="enquiry-btn">
+          ⬇ Download Enquiry PDF
+        </button>
+        <div class="form-success" id="enquiry-success">
+          <div class="ck">📄</div>
+          <h4>PDF Downloaded!</h4>
+          <p>Open WhatsApp and send the downloaded PDF to us:</p>
+          <a class="btn-wa-inline" href="https://wa.me/918438173206" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            Open WhatsApp Chat
+          </a>
+          <p class="success-hint">Attach & send the PDF — we'll reply within 24 hrs!</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="images/logo/logo.png" alt="NIRA Robotics" class="f-logo"
+       onerror="this.style.display='none';document.getElementById('fl-fb').style.display='block'">
+  <div class="f-logo-fb" id="fl-fb" style="display:none">NIRA Robotics</div>
+  <p class="f-tag">Logically Practical</p>
+  <p>© 2025 NIRA Robotics, Chennai, Tamil Nadu, India. All rights reserved.</p>
+  <p style="margin-top:8px">
+    <a href="tel:+918438173206" style="color:var(--accent)">+91 84381 73206</a> &nbsp;·&nbsp;
+    <a href="mailto:nirarobotics@gmail.com" style="color:var(--accent)">nirarobotics@gmail.com</a>
+  </p>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<button id="float-wa" title="WhatsApp" onclick="window.open('https://wa.me/918438173206?text=Hi%20NIRA%20Robotics!','_blank')">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</button>
+
+<!-- FLOATING REGISTER -->
+<button id="float-register" onclick="openModal('modal-register')">Register Now</button>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <div class="lb-content">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <div class="lb-img-wrap" id="lb-img-wrap"></div>
+    <div class="lb-title" id="lb-title"></div>
+  </div>
+</div>
+
+<!-- REGISTER MODAL — submits via WhatsApp -->
+<div class="modal-overlay" id="modal-register" onclick="if(event.target===this)closeModal('modal-register')">
+  <div class="modal-box" style="max-width:600px">
+    <button class="modal-close" onclick="closeModal('modal-register')">✕</button>
+    <div class="modal-title">Register Your Child 🚀</div>
+    <p class="modal-sub">Fill the form — clicking Submit opens WhatsApp with everything pre-filled. Just tap Send!</p>
+    <form id="register-form" onsubmit="sendRegistrationViaWhatsApp(event)">
+      <div class="two-col-fg">
+        <div class="form-group">
+          <label>Parent Name *</label>
+          <input id="rg-pname" type="text" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Child's Name *</label>
+          <input id="rg-cname" type="text" placeholder="Child's name" required>
+        </div>
+      </div>
+      <div class="two-col-fg">
+        <div class="form-group">
+          <label>Child's Age *</label>
+          <input id="rg-age" type="number" placeholder="Age" min="5" max="18" required>
+        </div>
+        <div class="form-group">
+          <label>Grade / Class</label>
+          <input id="rg-grade" type="text" placeholder="e.g. Grade 7">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Phone Number *</label>
+        <input id="rg-phone" type="tel" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+      <div class="form-group">
+        <label>Email (optional)</label>
+        <input id="rg-email" type="email" placeholder="parent@email.com">
+      </div>
+      <div class="form-group">
+        <label>Preferred Course *</label>
+        <select id="rg-course" required>
+          <option>Junior Level 1 — Robot Basics (₹3,499 · 2 months)</option>
+          <option>Junior Level 2 — Smart Machines (₹3,999 · 2 months)</option>
+          <option>Senior Level 1 — Arduino Robotics (₹5,499 · 2 months)</option>
+          <option>Senior Level 2 — AI & Robotics (₹6,999 · 2 months)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-submit wa-submit-btn" id="register-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        Submit via WhatsApp
+      </button>
+      <div class="form-success" id="register-success">
+        <div class="ck">🎉</div>
+        <h4>WhatsApp Opened!</h4>
+        <p>Your registration details are pre-filled in WhatsApp.<br>Just tap <strong>Send</strong> — we'll confirm your batch within 24 hours!</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="modal-pay" onclick="if(event.target===this)closeModal('modal-pay')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-pay')">✕</button>
+    <div id="pay-form-wrap">
+      <div class="modal-title">Secure Enrollment</div>
+      <p class="modal-sub">Confirm your seat — we'll arrange payment over call.</p>
+      <div class="pay-course-info">
+        <p>Course Selected</p>
+        <h3 id="pay-course-nm">—</h3>
+        <div class="pay-price-big" id="pay-price-nm">—</div>
+      </div>
+      <p style="font-size:.84rem;color:var(--text3);margin-bottom:12px;font-weight:600">Payment Method</p>
+      <div class="pay-methods">
+        <div class="pay-method selected" onclick="selPay(this,'upi')">📱 UPI</div>
+        <div class="pay-method" onclick="selPay(this,'card')">💳 Card</div>
+      </div>
+      <input type="text" class="pay-input" placeholder="UPI ID (e.g. name@upi)" id="pay-field">
+      <p class="pay-note">⚠️ This is a demo UI. After confirming, our team will contact you to complete the actual payment via UPI or bank transfer.</p>
+      <button class="btn-submit" onclick="simulatePay()">Confirm Enrollment →</button>
+    </div>
+    <div class="pay-success" id="pay-success-wrap">
+      <div class="ck">✅</div>
+      <h3>Enrollment Confirmed!</h3>
+      <p>Our team will call you within 24 hours to arrange payment and share batch details.<br><br>
+      <strong>📞 +91 84381 73206</strong></p>
+      <br>
+      <button class="btn-primary" onclick="closeModal('modal-pay')" style="margin:0 auto;display:block">Back to Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* PRELOADER */
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),1300));
+
+/* THEME — dark by default, save preference */
+const themeBtn=document.getElementById('theme-toggle');
+const root=document.documentElement;
+let dark=localStorage.getItem('nira-theme')!==null?localStorage.getItem('nira-theme')==='dark':true;
+function applyTheme(){root.setAttribute('data-theme',dark?'dark':'light');themeBtn.textContent=dark?'☀️':'🌙';localStorage.setItem('nira-theme',dark?'dark':'light')}
+applyTheme();
+themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme()});
+
+/* NAV SCROLL */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>30));
+
+/* SMOOTH SCROLL HELPER */
+function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+
+/* SCROLL ANIMATIONS */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.10});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* PARALLAX */
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const o1=document.querySelector('.hero-orb-1'),o2=document.querySelector('.hero-orb-2'),gb=document.querySelector('.hero-grid-bg');
+  if(o1)o1.style.transform=`translateY(${sy*.18}px)`;
+  if(o2)o2.style.transform=`translateY(${sy*-.12}px)`;
+  if(gb)gb.style.transform=`translateY(${sy*.06}px)`;
+});
+
+/* HAMBURGER */
+const hamburger=document.getElementById('hamburger');
+hamburger.addEventListener('click',()=>{
+  const nl=document.getElementById('nav-links-list');
+  const open=nl.dataset.open==='1';
+  nl.style.cssText=open?'':'display:flex;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);padding:20px 5%;gap:18px;border-bottom:1px solid var(--border);z-index:899';
+  nl.dataset.open=open?'0':'1';
+});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+  const nl=document.getElementById('nav-links-list');nl.style.cssText='';nl.dataset.open='0';
+}));
+
+/* MODALS */
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');document.body.style.overflow='';
+  if(id==='modal-pay'){document.getElementById('pay-form-wrap').style.display='';document.getElementById('pay-success-wrap').style.display='none'}
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['modal-register','modal-pay','lightbox'].forEach(id=>{const el=document.getElementById(id);if(el&&el.classList.contains('open')){el.classList.remove('open');document.body.style.overflow=''}})}});
+
+/* PAYMENT MODAL */
+function openPayModal(name,price){
+  document.getElementById('pay-course-nm').textContent=name;
+  document.getElementById('pay-price-nm').textContent=price;
+  document.getElementById('pay-form-wrap').style.display='';
+  document.getElementById('pay-success-wrap').style.display='none';
+  openModal('modal-pay');
+}
+function selPay(el,type){
+  document.querySelectorAll('.pay-method').forEach(m=>m.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('pay-field').placeholder=type==='upi'?'UPI ID (e.g. name@upi)':'Card Number (16 digits)';
+}
+function simulatePay(){
+  if(!document.getElementById('pay-field').value.trim()){alert('Please enter your UPI ID or card number.');return}
+  document.getElementById('pay-form-wrap').style.display='none';
+  document.getElementById('pay-success-wrap').style.display='block';
+}
+
+/* LIGHTBOX */
+function openLightbox(src,emoji,title){
+  const wrap=document.getElementById('lb-img-wrap');wrap.innerHTML='';
+  const img=new Image();
+  img.style.cssText='width:100%;height:auto;max-height:75vh;object-fit:contain;border-radius:16px';
+  img.src=src;
+  img.onerror=()=>{wrap.innerHTML=`<span style="font-size:7rem;padding:40px">${emoji}</span>`};
+  wrap.appendChild(img);
+  document.getElementById('lb-title').textContent=title;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
+
+/* STORE */
+const storeItems=[
+  {img:'images/store/s1.png',e:'🔲',name:'Arduino Uno R3',price:'₹399'},
+  {img:'images/store/s2.png',e:'🔌',name:'Arduino Nano',price:'₹349'},
+  {img:'images/store/s3.png',e:'💡',name:'Buzzer 6-12 V',price:'₹149'},
+  {img:'images/store/s4.png',e:'🔋',name:'LiPo Battery 2000mAh',price:'₹499'},
+  {img:'images/store/s5.png',e:'📡',name:'IR Sensor Module',price:'₹120'},
+  {img:'images/store/s6.png',e:'🧲',name:'DC Motor + Driver Module',price:'₹399'},
+  {img:'images/store/s7.png',e:'📟',name:'Breadboard',price:'₹299'},
+  {img:'images/store/s8.png',e:'🔗',name:'Jumper Wire Set',price:'₹140'},
+];
+const cart=[];
+function renderStore(){
+  document.getElementById('store-grid').innerHTML=storeItems.map((item,i)=>`
+    <div class="store-card reveal">
+      <img src="${item.img}" class="store-img" alt="${item.name}"
+           onload="this.nextElementSibling.style.display='none'"
+           onerror="this.style.display='none'">
+      <div class="store-emoji-fb">${item.e}</div>
+      <h4>${item.name}</h4>
+      <div class="price">${item.price}</div>
+      <button class="btn-add" id="ab${i}" onclick="addToCart(${i})">+ Add to List</button>
+    </div>`).join('');
+  document.querySelectorAll('.store-card').forEach(el=>obs.observe(el));
+}
+renderStore();
+function addToCart(i){
+  if(cart.find(c=>c.name===storeItems[i].name))return;
+  cart.push(storeItems[i]);
+  const btn=document.getElementById('ab'+i);btn.textContent='✓ Added';btn.classList.add('added');
+  const ul=document.getElementById('cart-list');
+  if(ul.querySelector('li[style]'))ul.innerHTML='';
+  const li=document.createElement('li');li.textContent=storeItems[i].e+' '+storeItems[i].name+' — '+storeItems[i].price;ul.appendChild(li);
+}
+function downloadList(){
+  if(cart.length===0){alert('Add some items first!');return}
+  const txt=['NIRA Robotics — Component List','='.repeat(34),'',
+    ...cart.map((c,i)=>`${i+1}. ${c.name}  —  ${c.price}`),'',
+    'To order:','Phone / WhatsApp : +91 84381 73206','Email            : nirarobotics@gmail.com','Location         : Chennai, Tamil Nadu, India'].join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='NIRA_Component_List.txt';a.click();
+}
+
+/* ── WHATSAPP NUMBER ── */
+const WA_NUMBER = '918438173206';
+
+/* helper: build wa.me URL and open it */
+function openWA(message){
+  const url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message);
+  window.open(url, '_blank');
+}
+
+/* ── ENQUIRY FORM → WhatsApp ── */
+function sendEnquiryViaWhatsApp(e){
+  e.preventDefault();
+  const name   = document.getElementById('eq-name').value.trim();
+  const phone  = document.getElementById('eq-phone').value.trim();
+  const age    = document.getElementById('eq-age').value.trim();
+  const course = document.getElementById('eq-course').value;
+  const msg    = document.getElementById('eq-msg').value.trim();
+
+  const text =
+`📋 *NEW ENQUIRY — NIRA Robotics*
+━━━━━━━━━━━━━━━━━━━━━━
+👤 *Parent Name :* ${name}
+📞 *Phone       :* ${phone}
+🧒 *Child's Age :* ${age} years
+📚 *Course      :* ${course}` +
+(msg ? `\n💬 *Message     :* ${msg}` : '') +
+`
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 Sent from nirarobotics.in`;
+
+  openWA(text);
+
+  /* show success state */
+  document.getElementById('enquiry-form').querySelectorAll('.form-group,.two-col-fg,[type=submit]')
+    .forEach(el => el.style.display = 'none');
+  document.getElementById('enquiry-success').style.display = 'block';
+}
+
+/* ── REGISTRATION FORM → WhatsApp ── */
+function sendRegistrationViaWhatsApp(e){
+  e.preventDefault();
+  const pname  = document.getElementById('rg-pname').value.trim();
+  const cname  = document.getElementById('rg-cname').value.trim();
+  const age    = document.getElementById('rg-age').value.trim();
+  const grade  = document.getElementById('rg-grade').value.trim();
+  const phone  = document.getElementById('rg-phone').value.trim();
+  const email  = document.getElementById('rg-email').value.trim();
+  const course = document.getElementById('rg-course').value;
+
+  const text =
+`🎓 *NEW REGISTRATION — NIRA Robotics*
+━━━━━━━━━━━━━━━━━━━━━━
+👤 *Parent Name  :* ${pname}
+🧒 *Child's Name :* ${cname}
+🎂 *Child's Age  :* ${age} years` +
+(grade ? `\n🏫 *Grade/Class  :* ${grade}` : '') +
+`
+📞 *Phone        :* ${phone}` +
+(email ? `\n✉️  *Email        :* ${email}` : '') +
+`
+📚 *Course       :* ${course}
+━━━━━━━━━━━━━━━━━━━━━━
+🌐 Sent from nirarobotics.in`;
+
+  openWA(text);
+
+  /* show success state */
+  document.getElementById('register-form').querySelectorAll('.form-group,.two-col-fg,[type=submit]')
+    .forEach(el => el.style.display = 'none');
+  document.getElementById('register-success').style.display = 'block';
+  setTimeout(() => closeModal('modal-register'), 4000);
+}
+</script>
+</body>
+</html>
