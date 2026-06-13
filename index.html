@@ -80,11 +80,11 @@
     ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:99px}
 
     /* PRELOADER */
-    #preloader{position:fixed;inset:0;z-index:9999;background:#080c12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .7s,visibility .7s}
+    #preloader{position:fixed;inset:0;z-index:9999;background:#080c12;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .3s,visibility .3s}
     #preloader.hidden{opacity:0;visibility:hidden}
-    .pre-logo{font-family:var(--font-head);font-size:2.6rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;animation:preLogoPulse 1.4s ease infinite}
+    .pre-logo{font-family:var(--font-head);font-size:2.6rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;animation:preLogoPulse 1.0s ease infinite}
     .pre-tag{font-size:.78rem;color:#4a5f75;letter-spacing:.14em;text-transform:uppercase}
-    .pre-spinner{width:44px;height:44px;border:3px solid rgba(10,118,199,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+    .pre-spinner{width:44px;height:44px;border:3px solid rgba(10,118,199,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .4s linear infinite}
     @keyframes preLogoPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.95)}}
     @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -117,7 +117,7 @@
     .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:99px;padding:6px 16px 6px 10px;font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:28px;backdrop-filter:blur(12px)}
     .hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:badgePulse 2s ease infinite}
     @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}50%{box-shadow:0 0 0 6px transparent}}
-    .hero-h1{font-family:var(--font-head);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--text);margin-bottom:22px}
+    .hero-h1{font-family:var(--font-head);font-size:clamp(2.2rem,6.5vw,3.8rem);font-weight:700;line-height:1.28;letter-spacing:-.03em;color:var(--text);margin-bottom:22px}
     .hero-h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .hero-sub{font-size:1.12rem;font-weight:300;color:var(--text2);line-height:1.7;max-width:520px;margin-bottom:44px}
     .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
@@ -132,7 +132,7 @@
     .hero-robot-card{position:absolute;inset:20px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:var(--shadow-lg)}
     .robot-img-real{width:220px;height:220px;object-fit:contain;animation:robotFloat 4s ease-in-out infinite;display:none}
     .robot-img-real.show{display:block}
-    .robot-svg-wrap{width:260px;height:260px;animation:robotFloat 4s ease-in-out infinite}
+    .robot-svg-wrap{width:260px;height:26  b 0px;animation:robotFloat 4s ease-in-out infinite}
     @keyframes robotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
     .hero-stats{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);display:flex;gap:14px}
     .hero-stat-pill{background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:99px;padding:8px 18px;text-align:center;white-space:nowrap}
@@ -181,16 +181,117 @@
     .course-img .ci-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;transition:transform .5s}
     .course-card:hover .ci-inner{transform:scale(1.14)}
     .course-badge{position:absolute;top:12px;right:12px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:99px;letter-spacing:.06em}
+    .ai-badge{background:linear-gradient(135deg,#8b5cf6,#7c3aed)!important}
+    .teal-badge{background:linear-gradient(135deg,#dc2626,#991b1b)!important}
     .course-duration{position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:99px;backdrop-filter:blur(8px)}
     .course-body{padding:22px 22px 26px}
-    .course-level{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px}
-    .course-body h3{font-family:var(--font-head);font-size:1.12rem;font-weight:700;color:var(--text);margin-bottom:8px}
+    .course-level{font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:8px}
+    .ai-level{color:#a78bfa!important}
+    .teal-level{color:#f87171!important}
+    .course-body h3{font-family:var(--font-head);font-size:1.18rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.01em}
     .course-kit-tag{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;color:#22c55e;font-weight:600;margin-bottom:10px}
-    .course-body p{font-size:.88rem;color:var(--text2);line-height:1.6;font-weight:300;margin-bottom:20px}
+    .course-body p{font-size:.88rem;color:var(--text2);line-height:1.6;font-weight:400;margin-bottom:20px}
     .course-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:16px}
-    .course-price{font-family:var(--font-head);font-size:1.18rem;font-weight:700;color:var(--text)}
-    .btn-enroll{padding:8px 18px;border-radius:99px;background:var(--accent);color:#fff;font-size:.8rem;font-weight:600;border:none;transition:var(--transition)}
+    .course-price{font-family:var(--font-head);font-size:1.22rem;font-weight:800;color:var(--text)}
+    .btn-enroll{padding:8px 18px;border-radius:99px;background:var(--accent);color:#fff;font-size:.8rem;font-weight:700;border:none;transition:var(--transition)}
     .btn-enroll:hover{transform:scale(1.06);box-shadow:0 4px 18px var(--accent-glow)}
+    .ai-enroll{background:linear-gradient(135deg,#8b5cf6,#7c3aed)!important}
+    .ai-enroll:hover{box-shadow:0 4px 18px rgba(139,92,246,.45)!important}
+    .teal-enroll{background:linear-gradient(135deg,#dc2626,#991b1b)!important}
+    .teal-enroll:hover{box-shadow:0 4px 18px rgba(220,38,38,.45)!important}
+
+    /* COURSE NAV BUTTONS */
+    .course-nav-btns{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:64px}
+    .course-nav-btn{display:inline-flex;align-items:center;gap:12px;padding:16px 36px;border-radius:16px;border:none;cursor:pointer;font-family:var(--font-head);font-size:1.05rem;font-weight:800;color:#fff;letter-spacing:.01em;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+    .course-nav-btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.10);opacity:0;transition:opacity .3s}
+    .course-nav-btn:hover::before{opacity:1}
+    .course-nav-btn:hover{transform:translateY(-4px) scale(1.03)}
+    .course-nav-btn .cnb-icon{font-size:1.5rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
+    .course-nav-btn .cnb-label{display:flex;flex-direction:column;text-align:left}
+    .course-nav-btn .cnb-label small{font-size:.7rem;font-weight:500;opacity:.8;letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-body)}
+    .cnb-robotics{background:linear-gradient(135deg,#0066cc 0%,#00b4ff 50%,#0066cc 100%);background-size:200% 200%;box-shadow:0 8px 32px rgba(0,120,255,.45),0 0 0 1px rgba(0,180,255,.25);animation:shimmerBtn 4s ease infinite}
+    .cnb-ai{background:linear-gradient(135deg,#6d28d9 0%,#a855f7 50%,#6d28d9 100%);background-size:200% 200%;box-shadow:0 8px 32px rgba(139,92,246,.45),0 0 0 1px rgba(168,85,247,.25);animation:shimmerBtn 4s ease infinite 0.5s}
+    .cnb-3d{background:linear-gradient(135deg,#991b1b 0%,#ef4444 50%,#991b1b 100%);background-size:200% 200%;box-shadow:0 8px 32px rgba(239,68,68,.45),0 0 0 1px rgba(248,113,113,.25);animation:shimmerBtn 4s ease infinite 1s}
+    @keyframes shimmerBtn{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    .cnb-robotics:hover{box-shadow:0 14px 44px rgba(0,120,255,.65),0 0 0 1.5px rgba(0,180,255,.4)}
+    .cnb-ai:hover{box-shadow:0 14px 44px rgba(139,92,246,.65),0 0 0 1.5px rgba(168,85,247,.4)}
+    .cnb-3d:hover{box-shadow:0 14px 44px rgba(239,68,68,.65),0 0 0 1.5px rgba(248,113,113,.4)}
+
+    /* COURSE SECTION TABS (hidden switcher) */
+    .course-tabs{display:none}
+    .course-section{display:none}
+    .course-section.active{display:block}
+
+    /* COURSE SECTION INTRO */
+    .course-section-intro{display:flex;align-items:center;gap:24px;max-width:1280px;margin:0 auto 48px;padding:32px 36px;border-radius:20px;border:1px solid var(--border);backdrop-filter:blur(14px)}
+    .csi-robotics{background:linear-gradient(135deg,rgba(0,100,204,.22),rgba(0,180,255,.08));border-color:rgba(0,180,255,.25)!important}
+    .csi-ai{background:linear-gradient(135deg,rgba(109,40,217,.22),rgba(168,85,247,.08));border-color:rgba(168,85,247,.25)!important}
+    .csi-3d{background:linear-gradient(135deg,rgba(153,27,27,.22),rgba(239,68,68,.08));border-color:rgba(239,68,68,.25)!important}
+    .csi-icon{font-size:3.4rem;flex-shrink:0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+    .course-section-intro h3{font-family:var(--font-head);font-size:1.85rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.02em;line-height:1.1}
+    .csi-robotics h3{background:linear-gradient(135deg,#60c4ff,#0a76c7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .csi-ai h3{background:linear-gradient(135deg,#c084fc,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .csi-3d h3{background:linear-gradient(135deg,#fca5a5,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .course-section-intro p{font-size:1rem;color:var(--text2);line-height:1.65;font-weight:400;max-width:680px;margin:0}
+
+    /* ── REVIEWS SECTION ── */
+    #reviews{background:linear-gradient(160deg,#060c18 0%,#090e1e 40%,#06101a 100%);position:relative;overflow:hidden}
+    [data-theme="light"] #reviews{background:linear-gradient(160deg,#e8f0f8 0%,#dce8f5 40%,#e4eef8 100%)}
+    #reviews::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(10,118,199,.18) 0%,transparent 70%);pointer-events:none}
+    #reviews .section-label{color:#60c4ff}
+    #reviews .section-label::before{background:#60c4ff}
+
+    /* Rating summary */
+    .reviews-summary{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;max-width:900px;margin:0 auto 72px;padding:36px 40px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;backdrop-filter:blur(20px)}
+    [data-theme="light"] .reviews-summary{background:rgba(255,255,255,.6);border-color:rgba(10,118,199,.12)}
+    .reviews-score{text-align:center;flex-shrink:0}
+    .score-big{display:block;font-family:var(--font-head);font-size:4.2rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-.04em}
+    [data-theme="light"] .score-big{color:var(--text)}
+    .score-stars{font-size:1.5rem;color:#facc15;letter-spacing:2px;margin:4px 0}
+    .score-count{font-size:.78rem;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase}
+    [data-theme="light"] .score-count{color:var(--text3)}
+    .reviews-bar-group{flex:1;min-width:200px;display:flex;flex-direction:column;gap:8px}
+    .review-bar-row{display:flex;align-items:center;gap:10px;font-size:.78rem;color:rgba(255,255,255,.5)}
+    [data-theme="light"] .review-bar-row{color:var(--text3)}
+    .review-bar-row span:first-child{min-width:28px;text-align:right;font-weight:600}
+    .bar-track{flex:1;height:7px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+    [data-theme="light"] .bar-track{background:rgba(10,118,199,.10)}
+    .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#0a76c7,#60c4ff);transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+    .review-bar-row span:last-child{min-width:32px;font-weight:600;color:rgba(255,255,255,.6)}
+    [data-theme="light"] .review-bar-row span:last-child{color:var(--text2)}
+    .btn-write-review{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:99px;background:rgba(250,204,21,.12);border:1.5px solid rgba(250,204,21,.3);color:#facc15;font-size:.86rem;font-weight:700;text-decoration:none;transition:var(--transition);white-space:nowrap}
+    .btn-write-review:hover{background:rgba(250,204,21,.22);transform:scale(1.05)}
+
+    /* Review Cards — 3-up grid like reference */
+    .reviews-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1160px;margin:0 auto 0}
+    .review-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:32px 28px;backdrop-filter:blur(18px);transition:var(--transition);display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+    .review-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(96,196,255,.5),transparent);opacity:0;transition:opacity .35s}
+    .review-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .review-card:hover::before{opacity:1}
+    [data-theme="light"] .review-card{background:rgba(255,255,255,.75);border-color:rgba(10,118,199,.10);box-shadow:0 4px 24px rgba(10,118,199,.07)}
+    [data-theme="light"] .review-card:hover{box-shadow:0 16px 48px rgba(10,118,199,.14)}
+    .review-header{display:flex;align-items:center;gap:14px}
+    .reviewer-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;font-family:var(--font-head);font-size:1.3rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid rgba(255,255,255,.15)}
+    .reviewer-info{flex:1}
+    .reviewer-info strong{display:block;font-family:var(--font-head);font-size:1rem;font-weight:700;color:#fff;margin-bottom:2px}
+    [data-theme="light"] .reviewer-info strong{color:var(--text)}
+    .reviewer-info span{font-size:.78rem;color:rgba(255,255,255,.45)}
+    [data-theme="light"] .reviewer-info span{color:var(--text3)}
+    .review-google-icon{width:32px;height:32px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    [data-theme="light"] .review-google-icon{background:rgba(10,118,199,.06);border-color:rgba(10,118,199,.12)}
+    .review-stars{font-size:1.1rem;color:#facc15;letter-spacing:2px}
+    .review-text{font-size:.93rem;color:rgba(255,255,255,.65);line-height:1.7;font-weight:300;flex:1}
+    [data-theme="light"] .review-text{color:var(--text2)}
+    .review-text::before{content:'"';font-size:2.2rem;color:rgba(96,196,255,.25);font-family:Georgia,serif;line-height:0;vertical-align:-.5rem;margin-right:4px}
+    .review-date{font-size:.75rem;color:rgba(255,255,255,.28);letter-spacing:.04em;margin-top:auto}
+    [data-theme="light"] .review-date{color:var(--text3)}
+    .reviews-view-all{display:flex;justify-content:center;margin-top:48px}
+    .btn-all-reviews{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:99px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);font-size:.9rem;font-weight:600;text-decoration:none;transition:var(--transition)}
+    .btn-all-reviews:hover{background:rgba(255,255,255,.12);color:#fff;transform:translateY(-2px)}
+    [data-theme="light"] .btn-all-reviews{background:rgba(10,118,199,.06);border-color:rgba(10,118,199,.18);color:var(--accent)}
+    [data-theme="light"] .btn-all-reviews:hover{background:rgba(10,118,199,.12)}
+    @media(max-width:900px){.reviews-cards-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.reviews-cards-grid{grid-template-columns:1fr}.reviews-summary{gap:28px;padding:24px 20px}}
 
     /* GALLERY */
     #gallery{background:var(--bg)}
@@ -326,6 +427,9 @@
       .nav-hamburger{display:flex}
       .hero-stats{display:none}
       .two-col-fg{grid-template-columns:1fr}
+      .course-nav-btns{flex-direction:column;align-items:center;gap:14px}
+      .course-nav-btn{width:100%;max-width:400px;justify-content:center}
+      .course-section-intro{flex-direction:column;text-align:center;padding:24px 20px}
     }
     @media(max-width:600px){
       .courses-grid{grid-template-columns:1fr}
@@ -334,6 +438,7 @@
       section{padding:80px 5%}
       #float-register{padding:12px 18px;font-size:.8rem}
       .modal-box{padding:28px 20px}
+      .course-nav-btn{padding:14px 22px;font-size:.95rem}
     }
   </style>
 </head>
@@ -358,6 +463,7 @@
     <li><a href="#why">Why NIRA</a></li>
     <li><a href="#courses">Courses</a></li>
     <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#store">Store</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -378,11 +484,11 @@
   <div class="hero-content">
     <div class="hero-left">
       <div class="hero-badge reveal"><span class="hero-badge-dot"></span>Now Enrolling · Chennai, India</div>
-      <h1 class="hero-h1 reveal">Build the <em>Future</em><br>with Robotics</h1>
+      <h1 class="hero-h1 reveal">Build the <em>Future</em><br>with Robotics & AI</h1>
       <p class="hero-sub reveal">Hands-on practical learning that transforms curious minds into confident builders. Real kits. Real projects. Real skills.</p>
       <div class="hero-btns reveal">
-        <button class="btn-primary" onclick="scrollTo('courses')">Explore Courses</button>
-        <button class="btn-ghost" onclick="scrollTo('gallery')">View Projects</button>
+        <button class="btn-primary" onclick="niraScrollTo('courses')">Explore Courses</button>
+        <button class="btn-ghost" onclick="niraScrollTo('gallery')">View Projects</button>
       </div>
     </div>
     <div class="hero-right reveal zoom">
@@ -460,74 +566,272 @@
   <div class="section-head center">
     <div class="section-label reveal">Programs</div>
     <h2 class="section-title reveal">Our Courses</h2>
-    <p class="section-sub reveal">Structured, age-appropriate programs that grow with your child — from curious beginner to confident creator.</p>
+    <p class="section-sub reveal">Three specialised tracks, each with four progressive levels — from curious beginner to confident creator.</p>
   </div>
-  <div class="courses-grid stagger">
-    <div class="course-card reveal" onclick="openPayModal('Junior Level 1 — Robot Basics','₹3,499')">
-      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.18),rgba(58,157,232,.08))">
-        <div class="ci-inner">🌱</div>
-        <span class="course-badge">Ages 6–9</span>
-        <span class="course-duration">⏱ 2 Months</span>
+
+  <!-- ── Course Navigation Buttons ── -->
+  <div class="course-nav-btns reveal">
+    <button class="course-nav-btn cnb-robotics" onclick="switchCourseTab(this,'tab-robotics')">
+      <span class="cnb-icon">🤖</span>
+      <span class="cnb-label">
+        <small>Section 1</small>
+        Robotics
+      </span>
+    </button>
+    <button class="course-nav-btn cnb-ai" onclick="switchCourseTab(this,'tab-ai')">
+      <span class="cnb-icon">🧠</span>
+      <span class="cnb-label">
+        <small>Section 2</small>
+        AI Foundations &amp; Prompting
+      </span>
+    </button>
+    <button class="course-nav-btn cnb-3d" onclick="switchCourseTab(this,'tab-3d')">
+      <span class="cnb-icon">🖨️</span>
+      <span class="cnb-label">
+        <small>Section 3</small>
+        3D Designing &amp; Printing
+      </span>
+    </button>
+  </div>
+
+  <!-- ── SECTION 1 : Robotics ── -->
+  <div class="course-section active" id="tab-robotics">
+    <div class="course-section-intro csi-robotics reveal">
+      <div class="csi-icon">🤖</div>
+      <div>
+        <h3>Robotics</h3>
+        <p>Hands-on electronics, coding, and real robot builds — four levels that take learners from first circuits to autonomous AI-powered machines. Build. Program. Compete.</p>
       </div>
-      <div class="course-body">
-        <div class="course-level">Junior Level 1</div>
-        <h3>Robot Basics</h3>
-        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
-        <p>Introduction to electronics, simple circuits, and building your first robot using block-based programming.</p>
-        <div class="course-footer">
-          <span class="course-price">₹3,499</span>
-          <button class="btn-enroll">Enroll Now</button>
+    </div>
+    <div class="courses-grid stagger">
+      <div class="course-card reveal" onclick="openPayModal('Robotics — Level 1 · Robot Basics','₹3,499')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.18),rgba(58,157,232,.08))">
+          <div class="ci-inner">🌱</div>
+          <span class="course-badge">Ages 6–9</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level">Level 1</div>
+          <h3>Robot Basics</h3>
+          <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+          <p>Introduction to electronics, simple circuits, and building your first robot using block-based programming.</p>
+          <div class="course-footer">
+            <span class="course-price">₹3,499</span>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('Robotics — Level 2 · Smart Machines','₹3,999')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.22),rgba(58,157,232,.10))">
+          <div class="ci-inner">⚙️</div>
+          <span class="course-badge">Ages 10–12</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level">Level 2</div>
+          <h3>Smart Machines</h3>
+          <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+          <p>Sensors, actuators, and logic. Students build remote-controlled robots and learn beginner programming concepts.</p>
+          <div class="course-footer">
+            <span class="course-price">₹3,999</span>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('Robotics — Level 3 · Arduino Robotics','₹5,499')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.25),rgba(58,157,232,.12))">
+          <div class="ci-inner">🔧</div>
+          <span class="course-badge">Ages 13–15</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level">Level 3</div>
+          <h3>Arduino Robotics</h3>
+          <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+          <p>Dive into Arduino, C++ programming, motor control, and build autonomous robots that respond to their environment.</p>
+          <div class="course-footer">
+            <span class="course-price">₹5,499</span>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('Robotics — Level 4 · AI &amp; Advanced Robotics','₹6,999')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.30),rgba(58,157,232,.15))">
+          <div class="ci-inner">🤖</div>
+          <span class="course-badge">Ages 16–17</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level">Level 4</div>
+          <h3>AI &amp; Advanced Robotics</h3>
+          <div class="course-kit-tag">📦 Includes Take-home Kit</div>
+          <p>Advanced robotics with AI integration — computer vision, machine learning basics, and competition project prep.</p>
+          <div class="course-footer">
+            <span class="course-price">₹6,999</span>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="course-card reveal" onclick="openPayModal('Junior Level 2 — Smart Machines','₹3,999')">
-      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.22),rgba(58,157,232,.10))">
-        <div class="ci-inner">⚙️</div>
-        <span class="course-badge">Ages 10–12</span>
-        <span class="course-duration">⏱ 2 Months</span>
+  </div>
+
+  <!-- ── SECTION 2 : AI Foundations & Prompting ── -->
+  <div class="course-section" id="tab-ai">
+    <div class="course-section-intro csi-ai reveal">
+      <div class="csi-icon">🧠</div>
+      <div>
+        <h3>AI Foundations &amp; Prompting</h3>
+        <p>Learn how AI thinks, master prompt engineering, and build real AI-powered projects. Four levels that transform learners into confident AI creators and innovators.</p>
       </div>
-      <div class="course-body">
-        <div class="course-level">Junior Level 2</div>
-        <h3>Smart Machines</h3>
-        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
-        <p>Sensors, actuators, and logic. Students build remote-controlled robots and learn beginner programming concepts.</p>
-        <div class="course-footer">
-          <span class="course-price">₹3,999</span>
-          <button class="btn-enroll">Enroll Now</button>
+    </div>
+    <div class="courses-grid stagger">
+      <div class="course-card reveal" onclick="openPayModal('AI Foundations — Level 1 · How AI Thinks','₹2,999')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(138,43,226,.15),rgba(200,100,255,.07))">
+          <div class="ci-inner">💡</div>
+          <span class="course-badge ai-badge">Ages 8–11</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level ai-level">Level 1</div>
+          <h3>How AI Thinks</h3>
+          <div class="course-kit-tag">🎓 Certificate Included</div>
+          <p>An approachable intro to artificial intelligence — what it is, how it learns, and how it's already part of our daily lives.</p>
+          <div class="course-footer">
+            <span class="course-price">₹2,999</span>
+            <button class="btn-enroll ai-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('AI Foundations — Level 2 · Prompt Engineering','₹3,499')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(138,43,226,.20),rgba(200,100,255,.10))">
+          <div class="ci-inner">✍️</div>
+          <span class="course-badge ai-badge">Ages 12–13</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level ai-level">Level 2</div>
+          <h3>Prompt Engineering</h3>
+          <div class="course-kit-tag">🎓 Certificate Included</div>
+          <p>Craft powerful prompts for ChatGPT, Claude, and Gemini. Learn prompt patterns, chain-of-thought, and role prompting.</p>
+          <div class="course-footer">
+            <span class="course-price">₹3,499</span>
+            <button class="btn-enroll ai-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('AI Foundations — Level 3 · AI Tools &amp; Workflows','₹4,499')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(138,43,226,.25),rgba(200,100,255,.12))">
+          <div class="ci-inner">🔬</div>
+          <span class="course-badge ai-badge">Ages 14–15</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level ai-level">Level 3</div>
+          <h3>AI Tools &amp; Workflows</h3>
+          <div class="course-kit-tag">🎓 Certificate Included</div>
+          <p>Automate tasks, generate content, and solve real problems using AI tools — combined with logical reasoning and ethics.</p>
+          <div class="course-footer">
+            <span class="course-price">₹4,499</span>
+            <button class="btn-enroll ai-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('AI Foundations — Level 4 · Build with AI','₹5,999')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(138,43,226,.30),rgba(200,100,255,.16))">
+          <div class="ci-inner">🚀</div>
+          <span class="course-badge ai-badge">Ages 16–17</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level ai-level">Level 4</div>
+          <h3>Build with AI</h3>
+          <div class="course-kit-tag">🎓 Certificate Included</div>
+          <p>Design and build real AI projects — chatbots, image classifiers, and more — using no-code and low-code platforms.</p>
+          <div class="course-footer">
+            <span class="course-price">₹5,999</span>
+            <button class="btn-enroll ai-enroll">Enroll Now</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="course-card reveal" onclick="openPayModal('Senior Level 1 — Arduino Robotics','₹5,499')">
-      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.25),rgba(58,157,232,.12))">
-        <div class="ci-inner">🔧</div>
-        <span class="course-badge">Ages 13–15</span>
-        <span class="course-duration">⏱ 2 Months</span>
-      </div>
-      <div class="course-body">
-        <div class="course-level">Senior Level 1</div>
-        <h3>Arduino Robotics</h3>
-        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
-        <p>Dive into Arduino, C++ programming, motor control, and build autonomous robots that respond to their environment.</p>
-        <div class="course-footer">
-          <span class="course-price">₹5,499</span>
-          <button class="btn-enroll">Enroll Now</button>
-        </div>
+  </div>
+
+  <!-- ── SECTION 3 : 3D Designing & Printing ── -->
+  <div class="course-section" id="tab-3d">
+    <div class="course-section-intro csi-3d reveal">
+      <div class="csi-icon">🖨️</div>
+      <div>
+        <h3>3D Designing &amp; Printing</h3>
+        <p>Turn ideas into real physical objects. Learn 3D modelling, design principles, and operate professional FDM printers — from your first shape to a full capstone innovation project.</p>
       </div>
     </div>
-    <div class="course-card reveal" onclick="openPayModal('Senior Level 2 — AI & Robotics','₹6,999')">
-      <div class="course-img" style="background:linear-gradient(135deg,rgba(10,118,199,.30),rgba(58,157,232,.15))">
-        <div class="ci-inner">🧠</div>
-        <span class="course-badge">Ages 16–17</span>
-        <span class="course-duration">⏱ 2 Months</span>
+    <div class="courses-grid stagger">
+      <div class="course-card reveal" onclick="openPayModal('3D Design — Level 1 · 3D World Basics','₹3,299')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(20,184,166,.15),rgba(94,234,212,.07))">
+          <div class="ci-inner">📐</div>
+          <span class="course-badge teal-badge">Ages 9–11</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level teal-level">Level 1</div>
+          <h3>3D World Basics</h3>
+          <div class="course-kit-tag">🖨️ Print Your Own Model</div>
+          <p>Introduction to 3D thinking, spatial design, and basic modelling using beginner-friendly tools like Tinkercad.</p>
+          <div class="course-footer">
+            <span class="course-price">₹3,299</span>
+            <button class="btn-enroll teal-enroll">Enroll Now</button>
+          </div>
+        </div>
       </div>
-      <div class="course-body">
-        <div class="course-level">Senior Level 2</div>
-        <h3>AI & Robotics</h3>
-        <div class="course-kit-tag">📦 Includes Take-home Kit</div>
-        <p>Advanced robotics with AI integration — computer vision, machine learning basics, and project competition prep.</p>
-        <div class="course-footer">
-          <span class="course-price">₹6,999</span>
-          <button class="btn-enroll">Enroll Now</button>
+      <div class="course-card reveal" onclick="openPayModal('3D Design — Level 2 · Intermediate CAD','₹3,999')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(20,184,166,.20),rgba(94,234,212,.10))">
+          <div class="ci-inner">🧩</div>
+          <span class="course-badge teal-badge">Ages 12–13</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level teal-level">Level 2</div>
+          <h3>Intermediate CAD</h3>
+          <div class="course-kit-tag">🖨️ Print Your Own Model</div>
+          <p>Move to Fusion 360 or Onshape — learn parametric design, assembly joints, and print multi-part functional models.</p>
+          <div class="course-footer">
+            <span class="course-price">₹3,999</span>
+            <button class="btn-enroll teal-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('3D Design — Level 3 · Functional Prototyping','₹4,999')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(20,184,166,.25),rgba(94,234,212,.13))">
+          <div class="ci-inner">⚙️</div>
+          <span class="course-badge teal-badge">Ages 14–15</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level teal-level">Level 3</div>
+          <h3>Functional Prototyping</h3>
+          <div class="course-kit-tag">🖨️ Print Your Own Model</div>
+          <p>Design parts that actually work — gears, enclosures, brackets. Learn slicer settings and material selection for FDM printing.</p>
+          <div class="course-footer">
+            <span class="course-price">₹4,999</span>
+            <button class="btn-enroll teal-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="course-card reveal" onclick="openPayModal('3D Design — Level 4 · Design &amp; Innovation Project','₹6,499')">
+        <div class="course-img" style="background:linear-gradient(135deg,rgba(20,184,166,.30),rgba(94,234,212,.16))">
+          <div class="ci-inner">🏆</div>
+          <span class="course-badge teal-badge">Ages 16–17</span>
+          <span class="course-duration">⏱ 2 Months</span>
+        </div>
+        <div class="course-body">
+          <div class="course-level teal-level">Level 4</div>
+          <h3>Design &amp; Innovation Project</h3>
+          <div class="course-kit-tag">🖨️ Print Your Own Model</div>
+          <p>Capstone project course — design, prototype, iterate, and present a real-world solution using advanced 3D printing techniques.</p>
+          <div class="course-footer">
+            <span class="course-price">₹6,499</span>
+            <button class="btn-enroll teal-enroll">Enroll Now</button>
+          </div>
         </div>
       </div>
     </div>
@@ -580,6 +884,117 @@
       <div class="gallery-overlay">🔍</div>
       <div class="gallery-caption">Vacuum BOT — Grade 9</div>
     </div>
+  </div>
+</section>
+
+<!-- GOOGLE REVIEWS -->
+<section id="reviews">
+  <div class="section-head center">
+    <div class="section-label reveal">Testimonials</div>
+    <h2 class="section-title reveal" style="color:#fff">What People Say</h2>
+    <p class="section-sub reveal" style="color:rgba(255,255,255,.5)">Discover what our parents and students have to say about their experience with NIRA Robotics.</p>
+  </div>
+
+  <!-- Rating Summary -->
+  <div class="reviews-summary reveal">
+    <div class="reviews-score">
+      <span class="score-big">4.9</span>
+      <div class="score-stars">★★★★★</div>
+      <span class="score-count">Based on Google Reviews</span>
+    </div>
+    <div class="reviews-bar-group">
+      <div class="review-bar-row"><span>5 ★</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span>88%</span></div>
+      <div class="review-bar-row"><span>4 ★</span><div class="bar-track"><div class="bar-fill" style="width:9%"></div></div><span>9%</span></div>
+      <div class="review-bar-row"><span>3 ★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span>2%</span></div>
+      <div class="review-bar-row"><span>2 ★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div><span>1%</span></div>
+      <div class="review-bar-row"><span>1 ★</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span>0%</span></div>
+    </div>
+    <a class="btn-write-review" href="https://g.page/r/nirarobotics/review" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Write a Review
+    </a>
+  </div>
+
+  <!-- 5 Review Cards — 3 top row + 2 centred bottom row -->
+  <div class="reviews-cards-grid stagger">
+
+    <div class="review-card reveal">
+      <div class="review-header">
+        <div class="reviewer-avatar">P</div>
+        <div class="reviewer-info">
+          <strong>Priya Ramesh</strong>
+          <span>Parent · Chennai</span>
+        </div>
+        <div class="review-google-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">My son joined the Robotics Level 1 program and within weeks he was building circuits at home. The instructors are incredibly patient and the take-home kit was a huge bonus. Highly recommend NIRA!</p>
+      <span class="review-date">2 weeks ago</span>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-header">
+        <div class="reviewer-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">A</div>
+        <div class="reviewer-info">
+          <strong>Arjun Krishnamurthy</strong>
+          <span>Student · Age 14</span>
+        </div>
+        <div class="review-google-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I've completed Level 3 Arduino Robotics and it changed how I think about engineering entirely. The projects are challenging but so rewarding. I won my school science fair because of NIRA!</p>
+      <span class="review-date">1 month ago</span>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-header">
+        <div class="reviewer-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">S</div>
+        <div class="reviewer-info">
+          <strong>Sudha Venkataraman</strong>
+          <span>Parent · Chennai</span>
+        </div>
+        <div class="review-google-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Enrolled both my kids — one in Robotics, the other in 3D Printing. The quality of teaching is exceptional. They come home excited every single class day. NIRA is truly different from the rest.</p>
+      <span class="review-date">3 weeks ago</span>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-header">
+        <div class="reviewer-avatar" style="background:linear-gradient(135deg,#14b8a6,#0d9488)">R</div>
+        <div class="reviewer-info">
+          <strong>Rohit Nair</strong>
+          <span>Parent · Anna Nagar</span>
+        </div>
+        <div class="review-google-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The AI Foundations course was a revelation for my daughter. She's only 13 but now confidently uses AI tools for school projects. Structured curriculum and small batch sizes make a huge difference.</p>
+      <span class="review-date">2 months ago</span>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-header">
+        <div class="reviewer-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)">M</div>
+        <div class="reviewer-info">
+          <strong>Meenakshi Iyer</strong>
+          <span>Parent · Velachery</span>
+        </div>
+        <div class="review-google-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">My son printed his first 3D model in just the second class! Seeing his face light up was priceless. The instructors are knowledgeable and make complex concepts fun and easy to understand.</p>
+      <span class="review-date">5 weeks ago</span>
+    </div>
+
+  </div>
+
+  <div class="reviews-view-all reveal">
+    <a class="btn-all-reviews" href="https://g.page/r/nirarobotics/review" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      View All Google Reviews
+    </a>
   </div>
 </section>
 
@@ -794,8 +1209,21 @@
 </div>
 
 <script>
-/* PRELOADER */
-window.addEventListener('load',()=>setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),1300));
+/* PRELOADER — hide after max 1.8s no matter what */
+(function(){
+  function hidePreloader(){
+    const p=document.getElementById('preloader');
+    if(p&&!p.classList.contains('hidden'))p.classList.add('hidden');
+  }
+  // Hard cap: never show preloader more than 1800ms
+  setTimeout(hidePreloader,1800);
+  // Also hide as soon as DOM + critical resources are ready
+  if(document.readyState==='complete'){setTimeout(hidePreloader,400);}
+  else{
+    document.addEventListener('DOMContentLoaded',()=>setTimeout(hidePreloader,400));
+    window.addEventListener('load',()=>setTimeout(hidePreloader,400));
+  }
+})();
 
 /* THEME — dark by default, save preference */
 const themeBtn=document.getElementById('theme-toggle');
@@ -810,7 +1238,7 @@ const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>30));
 
 /* SMOOTH SCROLL HELPER */
-function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function niraScrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 
 /* SCROLL ANIMATIONS */
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.10});
@@ -991,6 +1419,20 @@ function sendRegistrationViaWhatsApp(e){
     .forEach(el => el.style.display = 'none');
   document.getElementById('register-success').style.display = 'block';
   setTimeout(() => closeModal('modal-register'), 4000);
+}
+
+/* ── COURSE TAB SWITCHER (nav buttons scroll + show section) ── */
+function switchCourseTab(btn,tabId){
+  // Show the target section
+  document.querySelectorAll('.course-section').forEach(s=>s.classList.remove('active'));
+  const target=document.getElementById(tabId);
+  if(target){
+    target.classList.add('active');
+    // Re-observe any new reveal elements
+    target.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    // Smooth scroll to courses section
+    setTimeout(()=>document.getElementById('courses').scrollIntoView({behavior:'smooth',block:'start'}),60);
+  }
 }
 </script>
 </body>
